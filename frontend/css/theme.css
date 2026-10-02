@@ -1,0 +1,82 @@
+/* ==========================================================================
+   AGRICULTURE MANIPULATION ROBOT - THEME HELPERS & UTILITIES
+   ========================================================================== */
+
+/* Console / Log Terminal Window */
+.terminal-window {
+    background-color: #121e14;
+    color: #4af626;
+    font-family: var(--font-mono);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    height: 220px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    border: 1px solid #273b2a;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.terminal-line {
+    margin-bottom: 0.35rem;
+    word-break: break-all;
+}
+
+.terminal-time {
+    color: #81c784;
+    margin-right: 0.5rem;
+}
+
+.terminal-warn { color: #ffb74d; }
+.terminal-err  { color: #e57373; }
+.terminal-info { color: #64b5f6; }
+
+/* Status Indicators */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-online { background-color: #2e7d32; box-shadow: 0 0 8px #2e7d32; }
+.dot-offline { background-color: #c62828; }
+.dot-active { background-color: #0288d1; animation: pulseDot 1.5s infinite; }
+
+@keyframes pulseDot {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Canvas Simulation Container */
+.sim-canvas-wrapper {
+    background-color: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas#simCanvas {
+    background-color: #e8f0e6;
+    display: block;
+    cursor: crosshair;
+}
+
+[data-theme="dark"] canvas#simCanvas {
+    background-color: #1a291c;
+}

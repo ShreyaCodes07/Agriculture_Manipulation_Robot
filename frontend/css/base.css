@@ -1,0 +1,122 @@
+/* ==========================================================================
+   AGRICULTURE MANIPULATION ROBOT - BASE STYLES & DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+    /* Color Palette - Light Theme (Agriculture & Earth Tones) */
+    --primary-color: #2e7d32;         /* Earthy Forest Green */
+    --primary-hover: #1b5e20;
+    --primary-light: #e8f5e9;
+    --secondary-color: #d84315;       /* Harvesting Terracotta / Amber */
+    --secondary-hover: #bf360c;
+    --accent-color: #1565c0;          /* Deep Tech Blue */
+    --bg-main: #f4f7f4;               /* Light Eco Background */
+    --bg-card: #ffffff;
+    --bg-header: #ffffff;
+    --text-primary: #1c2a1d;          /* Dark Organic Text */
+    --text-secondary: #4a5d4e;
+    --text-muted: #768a78;
+    --border-color: #d0ded1;
+    
+    /* System Status Colors */
+    --status-success: #2e7d32;
+    --status-warning: #f57f17;
+    --status-danger: #c62828;
+    --status-info: #0288d1;
+
+    /* Tag / Badge Colors */
+    --badge-sim-bg: #e3f2fd;
+    --badge-sim-color: #1565c0;
+    --badge-hw-bg: #fff3e0;
+    --badge-hw-color: #e65100;
+    --badge-opt-bg: #f3e5f5;
+    --badge-opt-color: #7b1fa2;
+
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'Fira Code', 'Courier New', monospace;
+
+    /* Spacing & Layout */
+    --container-max-width: 1280px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-pill: 9999px;
+
+    /* Shadows & Effects */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --transition: all 0.25s ease-in-out;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+    --primary-color: #4caf50;
+    --primary-hover: #388e3c;
+    --primary-light: #1b3320;
+    --secondary-color: #ff7043;
+    --secondary-hover: #f4511e;
+    --accent-color: #42a5f5;
+    --bg-main: #0f1710;
+    --bg-card: #18241a;
+    --bg-header: #131d14;
+    --text-primary: #e8f5e9;
+    --text-secondary: #a3c2a6;
+    --text-muted: #6b886f;
+    --border-color: #273b2a;
+
+    --badge-sim-bg: #0d47a1;
+    --badge-sim-color: #e3f2fd;
+    --badge-hw-bg: #e65100;
+    --badge-hw-color: #fff3e0;
+    --badge-opt-bg: #4a148c;
+    --badge-opt-color: #f3e5f5;
+
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.6);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+code, pre {
+    font-family: var(--font-mono);
+}

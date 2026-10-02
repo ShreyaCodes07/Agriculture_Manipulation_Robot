@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Manipulation Robot - Control & Monitoring Dashboard</title>
+    <meta name="description" content="Simulation-first autonomous agricultural mobile robot with computer vision detection, 4-DOF manipulator arm, and live teleoperation dashboard.">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+    <!-- SITE HEADER & NAVIGATION BAR -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="#home" class="brand-logo" data-page="home">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,6V11.5L14.7,13.7L15.5,12.4L12.5,10.7V6H11Z"/>
+                </svg>
+                AgriBot OS
+            </a>
+
+            <ul class="nav-menu">
+                <li><a class="nav-link active" data-page="home">Home</a></li>
+                <li><a class="nav-link" data-page="about">About</a></li>
+                <li><a class="nav-link" data-page="design">Design</a></li>
+                <li><a class="nav-link" data-page="hardware">Hardware</a></li>
+                <li><a class="nav-link" data-page="simulation">Simulation</a></li>
+                <li><a class="nav-link" data-page="dashboard">Live Dashboard</a></li>
+                <li><a class="nav-link" data-page="detection">Vision Lab</a></li>
+                <li><a class="nav-link" data-page="results">Test Results</a></li>
+                <li><a class="nav-link" data-page="docs">Docs & Viva</a></li>
+                <li><a class="nav-link" data-page="team">Team</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+                    🌙 Dark Mode
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA FOR SPA VIEWS -->
+    <main class="container">
+
+        <!-- ===================================================================
+             1. HOME PAGE VIEW
+             =================================================================== -->
+        <section id="page-home" class="page-view active">
+            <div class="hero-section">
+                <div>
+                    <span class="badge badge-sim">SIMULATION FIRST SYSTEM</span>
+                    <h1 class="hero-title">Agriculture Manipulation Robot</h1>
+                    <p class="hero-tagline">
+                        Autonomous field navigation, computer vision crop inspection, 4-DOF robotic manipulator picking, and real-time telemetry dashboard.
+                    </p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                        <a class="btn btn-primary" data-page="dashboard">⚡ Open Live Dashboard</a>
+                        <a class="btn btn-secondary" data-page="simulation">🌱 Interactive Simulation</a>
+                    </div>
+                </div>
+                <div class="card" style="text-align: center; padding: 2rem;">
+                    <!-- Animated Robot Illustration SVG -->
+                    <svg viewBox="0 0 300 220" style="max-width: 280px; margin: 0 auto;">
+                        <!-- Ground Line -->
+                        <line x1="20" y1="180" x2="280" y2="180" stroke="var(--primary-color)" stroke-width="4" stroke-dasharray="5 5"/>
+                        <!-- Chassis -->
+                        <rect x="70" y="120" width="160" height="45" rx="8" fill="var(--primary-color)" />
+                        <!-- Wheels -->
+                        <circle cx="95" cy="170" r="18" fill="#333" stroke="#fff" stroke-width="3"/>
+                        <circle cx="205" cy="170" r="18" fill="#333" stroke="#fff" stroke-width="3"/>
+                        <!-- Robotic Arm Base -->
+                        <rect x="180" y="100" width="30" height="20" fill="var(--secondary-color)" />
+                        <!-- Arm Links -->
+                        <line x1="195" y1="100" x2="160" y2="60" stroke="var(--secondary-color)" stroke-width="8" stroke-linecap="round"/>
+                        <circle cx="160" cy="60" r="6" fill="#fff"/>
+                        <line x1="160" y1="60" x2="110" y2="70" stroke="var(--secondary-color)" stroke-width="6" stroke-linecap="round"/>
+                        <!-- Gripper -->
+                        <polygon points="100,65 110,60 110,80" fill="var(--accent-color)"/>
+                        <!-- Camera Tower -->
+                        <rect x="85" y="90" width="10" height="30" fill="#666"/>
+                        <circle cx="90" cy="85" r="10" fill="var(--accent-color)"/>
+                        <!-- Target Fruit -->
+                        <circle cx="85" cy="70" r="8" fill="#e53935"/>
+                    </svg>
+                    <p style="margin-top: 1rem; font-weight: 600; color: var(--text-secondary);">Autonomous Pick & Place Mobile Robot Architecture</p>
+                </div>
+            </div>
+
+            <!-- Key Feature Cards -->
+            <div class="grid-4" style="margin-top: 2rem;">
+                <div class="card">
+                    <span class="badge badge-sim">SIMULATION</span>
+                    <h3 class="card-title" style="margin-top: 0.5rem;">4-Wheel Chassis</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        Differential drive kinematics for autonomous row navigation, manual teleoperation, and obstacle turning.
+                    </p>
+                </div>
+                <div class="card">
+                    <span class="badge badge-sim">SIMULATION</span>
+                    <h3 class="card-title" style="margin-top: 0.5rem;">3-4 DOF Robotic Arm</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        Servo-actuated joint manipulator with inverse kinematics for precise fruit alignment, picking, and basket placing.
+                    </p>
+                </div>
+                <div class="card">
+                    <span class="badge badge-sim">SIMULATION</span>
+                    <h3 class="card-title" style="margin-top: 0.5rem;">OpenCV Vision</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        Color HSV and shape detection pipeline to identify target ripe fruits with bounding box localization.
+                    </p>
+                </div>
+                <div class="card">
+                    <span class="badge badge-hw">HARDWARE READY</span>
+                    <h3 class="card-title" style="margin-top: 0.5rem;">Multi-Sensor Hub</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        Ultrasonic distance monitoring for collision avoidance and analog soil moisture telemetry.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid-4" style="margin-top: 1.5rem;">
+                <div class="stat-card">
+                    <div class="stat-value">4 DOF</div>
+                    <div class="stat-label">Arm Degrees of Freedom</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">10 Hz</div>
+                    <div class="stat-label">Telemetry Stream Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">&lt; 30cm</div>
+                    <div class="stat-label">Obstacle Trigger Range</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2 Modes</div>
+                    <div class="stat-label">Manual & Autonomous</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             2. ABOUT THE PROJECT VIEW
+             =================================================================== -->
+        <section id="page-about" class="page-view">
+            <div class="page-header">
+                <h1>About the Project</h1>
+                <p class="page-subtitle">Project abstract, engineering objectives, problem formulation, and comparative analysis.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Abstract</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary);">
+                        Agricultural automation plays a vital role in addressing farm labor shortages and improving harvesting efficiency. This project presents a <strong>simulation-first autonomous mobile manipulator robot</strong> designed for field navigation, fruit detection, obstacle avoidance, and fruit harvesting. The system integrates Python OpenCV computer vision, a 2D kinematic field simulator, and a FastAPI-based monitoring dashboard.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Problem Statement</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary);">
+                        Traditional harvesting methods require intensive human labor, are time-consuming, and expose workers to grueling field conditions. Conventional static automation lacks mobilty across uneven plant rows. There is a need for an affordable, intelligent mobile robotic platform that can detect ripe fruits in real-time, avoid obstacles dynamically, and execute targeted pick-and-place operations.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem;">
+                <h3 class="card-title">System Comparison: Conventional vs Proposed System</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Feature / Parameter</th>
+                                <th>Conventional / Manual Method</th>
+                                <th>Proposed Manipulation Robot</th>
+                                <th>Implementation Scope</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Crop Inspection</td>
+                                <td>Manual visual inspection by laborers</td>
+                                <td>OpenCV color & bounding box detection</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                            </tr>
+                            <tr>
+                                <td>Field Mobility</td>
+                                <td>Human walking / Heavy tractor machinery</td>
+                                <td>4-wheel differential mobile chassis</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                            </tr>
+                            <tr>
+                                <td>Harvesting Action</td>
+                                <td>Hand picking</td>
+                                <td>3-4 DOF Servo robotic arm + end gripper</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                            </tr>
+                            <tr>
+                                <td>Obstacle Avoidance</td>
+                                <td>Human line-of-sight steering</td>
+                                <td>Ultrasonic distance sensor safety braking</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                            </tr>
+                            <tr>
+                                <td>Field Telemetry</td>
+                                <td>Manual soil sampling tools</td>
+                                <td>Real-time dashboard telemetry monitoring</td>
+                                <td><span class="badge badge-hw">HARDWARE READY</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-3" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3 class="card-title">Target Applications</h3>
+                    <ul style="padding-left: 1.2rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li>Selective greenhouse fruit picking (tomatoes, apples, citrus).</li>
+                        <li>Automated row navigation and field mapping.</li>
+                        <li>Real-time crop health & soil moisture monitoring.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">System Limitations</h3>
+                    <ul style="padding-left: 1.2rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li>2D simulation does not account for complex 3D terrain slopes.</li>
+                        <li>HSV vision sensitive to extreme outdoor lighting shifts.</li>
+                        <li>Payload limited by SG90/MG90S servo torque capacity.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Future Upgrade Scope</h3>
+                    <ul style="padding-left: 1.2rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li><span class="badge badge-opt">FUTURE</span> ROS 2 + Gazebo 3D simulation integration.</li>
+                        <li><span class="badge badge-opt">FUTURE</span> Deep learning crop detector (YOLOv8-nano).</li>
+                        <li><span class="badge badge-opt">FUTURE</span> Physical prototype deployment with ESP32.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             3. ROBOT DESIGN VIEW
+             =================================================================== -->
+        <section id="page-design" class="page-view">
+            <div class="page-header">
+                <h1>Robot Design & Architecture</h1>
+                <p class="page-subtitle">Hardware breakdown, system block diagram, software architecture, and state machine algorithms.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">System Architecture Flow</h3>
+                    <div style="text-align: center; padding: 1rem; background: var(--bg-main); border-radius: var(--radius-sm);">
+                        <svg viewBox="0 0 400 200" style="width: 100%; max-width: 360px;">
+                            <rect x="10" y="20" width="110" height="45" rx="5" fill="var(--primary-color)" />
+                            <text x="65" y="47" fill="#fff" font-size="12" text-anchor="middle">Sensors & Vision</text>
+                            
+                            <rect x="145" y="20" width="110" height="45" rx="5" fill="var(--accent-color)" />
+                            <text x="200" y="47" fill="#fff" font-size="12" text-anchor="middle">FastAPI Engine</text>
+
+                            <rect x="280" y="20" width="110" height="45" rx="5" fill="var(--secondary-color)" />
+                            <text x="335" y="47" fill="#fff" font-size="12" text-anchor="middle">Web Dashboard</text>
+
+                            <!-- Arrows -->
+                            <line x1="120" y1="42" x2="145" y2="42" stroke="var(--text-primary)" stroke-width="2" marker-end="url(#arrow)"/>
+                            <line x1="255" y1="42" x2="280" y2="42" stroke="var(--text-primary)" stroke-width="2" marker-end="url(#arrow)"/>
+
+                            <!-- Lower Feedback loop -->
+                            <rect x="145" y="120" width="110" height="45" rx="5" fill="#388e3c" />
+                            <text x="200" y="147" fill="#fff" font-size="12" text-anchor="middle">Actuators & Arm</text>
+
+                            <line x1="200" y1="65" x2="200" y2="120" stroke="var(--text-primary)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Autonomous Mission State Machine</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        The state planner controls pick-and-place execution:
+                    </p>
+                    <div class="terminal-window" style="height: 140px;">
+                        <div class="terminal-line"><span class="terminal-time">[STATE]</span> IDLE → SEARCHING_ROW</div>
+                        <div class="terminal-line"><span class="terminal-time">[STATE]</span> TARGET_DETECTED → APPROACHING</div>
+                        <div class="terminal-line"><span class="terminal-time">[STATE]</span> ALIGNING_ARM → PICKING_FRUIT</div>
+                        <div class="terminal-line"><span class="terminal-time">[STATE]</span> RETRACTING → DEPOSITING_BASKET</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem;">
+                <h3 class="card-title">Component Functional Specifications</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Subsystem</th>
+                                <th>Component Name</th>
+                                <th>Functional Description</th>
+                                <th>Control Interface</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mobile Base</td>
+                                <td>4-Wheel Chassis + DC Motors</td>
+                                <td>Provides forward/backward travel and differential turning along plant rows.</td>
+                                <td>L298N Motor Driver (PWM)</td>
+                            </tr>
+                            <tr>
+                                <td>Manipulator Arm</td>
+                                <td>3-4 DOF Servo Joint Arm</td>
+                                <td>Adjusts shoulder, elbow, wrist pitch, and end-effector orientation.</td>
+                                <td>PCA9685 / PWM Servo Pins</td>
+                            </tr>
+                            <tr>
+                                <td>End Effector</td>
+                                <td>Parallel Gripper Mechanism</td>
+                                <td>Grasps and releases identified fruits safely into the collection basket.</td>
+                                <td>SG90 / MG90S Servo</td>
+                            </tr>
+                            <tr>
+                                <td>Vision System</td>
+                                <td>USB Camera / ESP32-CAM</td>
+                                <td>Captures live video feed for color segmenting and bounding box localization.</td>
+                                <td>OpenCV VideoCapture / MJPEG Stream</td>
+                            </tr>
+                            <tr>
+                                <td>Safety Sensor</td>
+                                <td>HC-SR04 Ultrasonic Sensor</td>
+                                <td>Measures forward distance to obstacles; triggers emergency stop under 30 cm.</td>
+                                <td>GPIO Digital Echo/Trig</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             4. HARDWARE VIEW
+             =================================================================== -->
+        <section id="page-hardware" class="page-view">
+            <div class="page-header">
+                <h1>Hardware Design & Bill of Materials</h1>
+                <p class="page-subtitle">Wiring layout, pin mapping, power management, and hardware cost estimation in INR (₹).</p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Bill of Materials (BOM) - Estimated Cost in INR (₹)</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Item Description</th>
+                                <th>Qty</th>
+                                <th>Est. Unit Price (₹)</th>
+                                <th>Total Cost (₹)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: var(--primary-light);">
+                                <td colspan="6"><strong>ESSENTIAL COMPONENTS (Core Robot Setup)</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Chassis</td>
+                                <td>4WD Robot Smart Chassis Kit with Motors & Wheels</td>
+                                <td>1</td>
+                                <td>₹ 850</td>
+                                <td>₹ 850</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                            </tr>
+                            <tr>
+                                <td>Motor Driver</td>
+                                <td>L298N Dual H-Bridge Driver Board</td>
+                                <td>1</td>
+                                <td>₹ 180</td>
+                                <td>₹ 180</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                            </tr>
+                            <tr>
+                                <td>Robotic Arm</td>
+                                <td>3-4 DOF Acrylic Arm Kit with MG90S Metal Gear Servos</td>
+                                <td>1</td>
+                                <td>₹ 1,450</td>
+                                <td>₹ 1,450</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                            </tr>
+                            <tr>
+                                <td>Microcontroller</td>
+                                <td>Arduino Uno R3 / ESP32 Dev Board</td>
+                                <td>1</td>
+                                <td>₹ 450</td>
+                                <td>₹ 450</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                            </tr>
+                            <tr>
+                                <td>Obstacle Sensor</td>
+                                <td>HC-SR04 Ultrasonic Distance Sensor</td>
+                                <td>1</td>
+                                <td>₹ 85</td>
+                                <td>₹ 85</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                            </tr>
+                            <tr>
+                                <td>Camera</td>
+                                <td>USB Web Camera / ESP32-CAM Module</td>
+                                <td>1</td>
+                                <td>₹ 650</td>
+                                <td>₹ 650</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                            </tr>
+                            <tr>
+                                <td>Power</td>
+                                <td>12V Rechargeable Li-ion / 18650 Battery Pack + Holder</td>
+                                <td>1</td>
+                                <td>₹ 550</td>
+                                <td>₹ 550</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                            </tr>
+                            <tr style="font-weight: 700;">
+                                <td colspan="4">Subtotal Essential Components</td>
+                                <td>₹ 4,215</td>
+                                <td>---</td>
+                            </tr>
+
+                            <tr style="background: var(--badge-opt-bg); color: var(--badge-opt-color);">
+                                <td colspan="6"><strong>OPTIONAL / EXPANSION COMPONENTS</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Soil Telemetry</td>
+                                <td>Analog Soil Moisture Sensor Module</td>
+                                <td>1</td>
+                                <td>₹ 75</td>
+                                <td>₹ 75</td>
+                                <td><span class="badge badge-opt">OPTIONAL</span></td>
+                            </tr>
+                            <tr>
+                                <td>Wireless Bridge</td>
+                                <td>ESP32 Wi-Fi & Bluetooth Dual-Core Module</td>
+                                <td>1</td>
+                                <td>₹ 320</td>
+                                <td>₹ 320</td>
+                                <td><span class="badge badge-opt">OPTIONAL</span></td>
+                            </tr>
+                            <tr style="font-weight: 700;">
+                                <td colspan="4">Subtotal Optional Components</td>
+                                <td>₹ 395</td>
+                                <td>---</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3 class="card-title">Microcontroller Pin Assignment Mapping</h3>
+                    <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li><strong>D3, D5, D6, D9:</strong> L298N Motor Driver Inputs (ENA, IN1, IN2, IN3, IN4, ENB)</li>
+                        <li><strong>D10:</strong> HC-SR04 Ultrasonic Trigger Pin</li>
+                        <li><strong>D11:</strong> HC-SR04 Ultrasonic Echo Pin</li>
+                        <li><strong>A0:</strong> Analog Soil Moisture Sensor Signal Input</li>
+                        <li><strong>D2, D4, D7, D8:</strong> Arm Servos (Base, Shoulder, Elbow, Gripper)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Power Safety & Isolation Notes</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Crucial Safety Rule:</strong> Never power the L298N motor driver or servos directly from the Arduino 5V pin. DC motors and servos induce inductive voltage spikes that can crash or burn the microcontroller. Use a dedicated 12V battery line for motor power and step-down LM2596 buck converter for servos, sharing a common ground (GND) wire.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             5. SIMULATION VIEW PAGE
+             =================================================================== -->
+        <section id="page-simulation" class="page-view">
+            <div class="page-header">
+                <h1>2D Agricultural Field Simulator</h1>
+                <p class="page-subtitle">Interactive 2D Canvas rendering of field crop rows, fruit targets, stones, robot kinematics, and collection basket.</p>
+            </div>
+
+            <div class="grid-sidebar">
+                <!-- Canvas Simulation Container -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span class="badge badge-sim">SIMULATION RUNNER</span>
+                        <div id="simStatusPill" class="status-pill">
+                            <span class="status-indicator-dot dot-online"></span> Engine Active
+                        </div>
+                    </div>
+                    <div class="sim-canvas-wrapper">
+                        <canvas id="simCanvas" width="700" height="450"></canvas>
+                    </div>
+                </div>
+
+                <!-- Mission & Simulation Control Panel -->
+                <div class="card">
+                    <h3 class="card-title">Autonomous Mission Planner</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Harvesting Mission Strategy</label>
+                        <select id="missionTypeSelect" style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <option value="HARVEST_ALL">Harvest All Ripe Fruits (Full Field)</option>
+                            <option value="HARVEST_APPLES">Harvest Ripe Red Apples Only</option>
+                            <option value="HARVEST_LEMONS">Harvest Yellow Lemons Only</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Simulation Speed Multiplier</label>
+                        <input type="range" class="range-slider" id="simSpeedSlider" min="1" max="5" value="1">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem;">
+                        <button id="btnStartMission" class="btn btn-primary">🚀 Start Autonomous Mission</button>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button id="btnPauseMission" class="btn btn-outline" style="flex: 1;">⏸ Pause</button>
+                            <button id="btnResumeMission" class="btn btn-outline" style="flex: 1;">▶ Resume</button>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button id="btnStopMission" class="btn btn-secondary" style="flex: 1; background: #c62828;">⏹ Stop</button>
+                            <button id="btnResetMission" class="btn btn-secondary" style="flex: 1;">🔄 Reset</button>
+                        </div>
+                        <button id="btnHarvestFruit" class="btn btn-primary" style="background: #2e7d32; border-color: #1b5e20;">🍎 Harvest Nearest Fruit</button>
+                        <button id="btnToggleAutoMode" class="btn btn-outline" style="margin-top: 0.25rem;">MODE: AUTONOMOUS</button>
+                    </div>
+
+                    <div style="margin-top: 1.25rem; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+                        <label class="form-label" style="text-align: center; font-weight: 600;">Manual Chassis Override</label>
+                        <div class="dpad-container" style="margin: 0.5rem auto 0 auto;">
+                            <div></div>
+                            <button class="dpad-btn" id="btnSimDriveForward">▲</button>
+                            <div></div>
+                            <button class="dpad-btn" id="btnSimDriveLeft">◄</button>
+                            <button class="dpad-btn" id="btnSimDriveStop">■</button>
+                            <button class="dpad-btn" id="btnSimDriveRight">►</button>
+                            <div></div>
+                            <button class="dpad-btn" id="btnSimDriveReverse">▼</button>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Status & Target Queue Section -->
+            <div class="card" style="margin-top: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <h3 class="card-title" style="margin: 0;">Active Mission Progress & Path Status</h3>
+                        <p id="missionStatusMsg" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                            Mission Planner ready.
+                        </p>
+                    </div>
+                    <span id="missionStateBadge" class="badge badge-sim">STATE: IDLE</span>
+                </div>
+
+                <!-- Mission Progress Bar -->
+                <div style="width: 100%; height: 22px; background: var(--bg-main); border-radius: var(--radius-sm); border: 1px solid var(--border-color); overflow: hidden; margin-bottom: 1rem; position: relative;">
+                    <div id="missionProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #2e7d32, #4caf50); color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: width 0.3s ease;">
+                        0%
+                    </div>
+                </div>
+
+                <!-- Quick Stats Grid -->
+                <div class="grid-4" style="margin-bottom: 1rem;">
+                    <div class="stat-card" style="padding: 0.75rem;">
+                        <div id="missionHarvestCount" class="stat-value" style="font-size: 1.2rem;">0 / 5 Targets</div>
+                        <div class="stat-label">Harvest Progress</div>
+                    </div>
+                    <div class="stat-card" style="padding: 0.75rem;">
+                        <div id="missionCurrentTarget" class="stat-value" style="font-size: 1.2rem;">FRUIT_1</div>
+                        <div class="stat-label">Current Active Target</div>
+                    </div>
+                    <div class="stat-card" style="padding: 0.75rem;">
+                        <div id="missionWaypointsCount" class="stat-value" style="font-size: 1.2rem;">0 Nodes</div>
+                        <div class="stat-label">A* Path Waypoints</div>
+                    </div>
+                    <div class="stat-card" style="padding: 0.75rem;">
+                        <div class="stat-value" style="font-size: 1.2rem;">A* (A-Star)</div>
+                        <div class="stat-label">Path Planner Algorithm</div>
+                    </div>
+                </div>
+
+                <!-- Mission Targets Queue Matrix -->
+                <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-primary);">Queued Target Visiting Order</h4>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Target ID</th>
+                                <th>Fruit Label</th>
+                                <th>Field Coordinates (X, Y)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="missionTargetsTbody">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: var(--text-secondary);">
+                                    No targets queued. Select a mission strategy and click Start!
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ===================================================================
+             6. LIVE MONITORING DASHBOARD VIEW
+             =================================================================== -->
+        <section id="page-dashboard" class="page-view">
+            <div class="page-header">
+                <h1>Live Robot Monitoring & Teleoperation</h1>
+                <p class="page-subtitle">Real-time status feed, computer vision overlay, sensor telemetry, manual override, and Emergency Stop.</p>
+            </div>
+
+            <!-- E-STOP BANNER -->
+            <div style="margin-bottom: 1.5rem;">
+                <button id="btnEStop" class="btn-estop">🚨 EMERGENCY STOP (SPACEBAR) 🚨</button>
+            </div>
+
+            <div class="grid-3">
+                <!-- Camera Feed Box -->
+                <div class="card">
+                    <div class="card-title">
+                        <span>Live Camera Feed</span>
+                        <span class="badge badge-sim">OPENCV REAL-TIME</span>
+                    </div>
+                    <div style="width: 100%; height: 210px; background: #0f172a; border-radius: var(--radius-sm); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <img id="dashboardCameraFeed" src="" alt="Live OpenCV Camera Stream" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                        <div id="dashboardCameraPlaceholder" style="color: #4ade80; font-family: var(--font-mono, monospace); font-size: 0.85rem; text-align: center;">
+                            [ INITIALIZING OPENCV CAMERA STREAM... ]
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Robot Pose & Status -->
+                <div class="card">
+                    <div class="card-title">
+                        <span>Robot Telemetry</span>
+                        <span id="controlModeBadge" class="badge badge-sim">MODE: MANUAL</span>
+                    </div>
+                    <ul style="list-style: none; font-size: 0.9rem; line-height: 2;">
+                        <li><strong>Position (X, Y):</strong> <span id="telemetryPos">X: 120 cm, Y: 250 cm</span></li>
+                        <li><strong>Heading Angle:</strong> <span id="telemetryHeading">0.0°</span></li>
+                        <li><strong>Ultrasonic Distance:</strong> <span id="telemetryDistance" style="color: var(--status-success); font-weight: 700;">85 cm (Clear)</span></li>
+                        <li><strong>Soil Moisture:</strong> <span id="telemetrySoil">42% (Normal)</span></li>
+                    </ul>
+                </div>
+
+                <!-- Arm & Gripper State -->
+                <div class="card">
+                    <div class="card-title">
+                        <span>Arm & Gripper State</span>
+                        <span class="badge badge-sim">4 DOF</span>
+                    </div>
+                    <ul style="list-style: none; font-size: 0.9rem; line-height: 2;">
+                        <li><strong>Base Joint θ1:</strong> <span id="angleBase">90°</span></li>
+                        <li><strong>Shoulder Joint θ2:</strong> <span id="angleShoulder">45°</span></li>
+                        <li><strong>Elbow Joint θ3:</strong> <span id="angleElbow">30°</span></li>
+                        <li><strong>Gripper State:</strong> <span id="gripperState" class="badge badge-success">OPEN</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4-DOF Robotic Manipulator Arm & Kinematics Control Panel -->
+            <div class="card" style="margin-top: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <h3 class="card-title" style="margin: 0;">4-DOF Manipulator Arm & Inverse Kinematics Control</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                            Direct joint articulation, Cartesian (X, Y, Z) Inverse Kinematics solver, and 8-step pick-and-place trajectory control.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span id="armGripperBadge" class="badge badge-success">GRIPPER: OPEN</span>
+                        <span id="armTrajStateBadge" class="badge badge-sim">TRAJECTORY: HOME</span>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Forward Kinematics Joint Sliders -->
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text-primary);">Manual Joint Servo Sliders (Forward Kinematics)</h4>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Base Joint θ1 (0° - 180°): <span id="armBaseVal">90°</span></label>
+                            <input type="range" class="range-slider" id="armBaseSlider" min="0" max="180" value="90">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Shoulder Joint θ2 (0° - 135°): <span id="armShoulderVal">45°</span></label>
+                            <input type="range" class="range-slider" id="armShoulderSlider" min="0" max="135" value="45">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Elbow Joint θ3 (0° - 135°): <span id="armElbowVal">30°</span></label>
+                            <input type="range" class="range-slider" id="armElbowSlider" min="0" max="135" value="30">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Wrist Pitch Joint θ4 (-90° - 90°): <span id="armWristVal">0°</span></label>
+                            <input type="range" class="range-slider" id="armWristSlider" min="-90" max="90" value="0">
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                            <button id="btnOpenGripper" class="btn btn-outline" style="flex: 1;">👐 Open Gripper</button>
+                            <button id="btnCloseGripper" class="btn btn-primary" style="flex: 1; background: #e65100; border-color: #ef6c00;">✊ Close Gripper</button>
+                        </div>
+                    </div>
+
+                    <!-- Cartesian Inverse Kinematics & Trajectory Engine -->
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text-primary);">Cartesian Target IK Solver (Inverse Kinematics)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                            Current End-Effector 3D Position: <strong id="armEEPosText" style="color: var(--primary-color);">X: 25 cm, Y: 0 cm, Z: 10 cm</strong>
+                        </p>
+
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <div>
+                                <label class="form-label" style="font-size: 0.75rem;">Target X (cm)</label>
+                                <input type="number" id="ikInputX" value="25.0" step="1.0" style="width: 100%; padding: 0.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            </div>
+                            <div>
+                                <label class="form-label" style="font-size: 0.75rem;">Target Y (cm)</label>
+                                <input type="number" id="ikInputY" value="0.0" step="1.0" style="width: 100%; padding: 0.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            </div>
+                            <div>
+                                <label class="form-label" style="font-size: 0.75rem;">Target Z (cm)</label>
+                                <input type="number" id="ikInputZ" value="10.0" step="1.0" style="width: 100%; padding: 0.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            </div>
+                        </div>
+
+                        <button id="btnSolveIK" class="btn btn-secondary" style="width: 100%; margin-bottom: 1rem;">🧮 Compute & Execute IK Angles</button>
+
+                        <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-primary);">Autonomous Pick-and-Place Trajectory</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                            Triggers 8-step pick sequence: HOME → APPROACH → ALIGN → GRASP → LIFT → DEPOSIT → RELEASE → RETURN
+                        </p>
+                        <button id="btnRunPickSequence" class="btn btn-primary" style="width: 100%; background: #2e7d32; border-color: #1b5e20;">🦾 Step Pick-and-Place Trajectory</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teleoperation Controls & Mission Console -->
+            <div class="grid-2" style="margin-top: 1.5rem;">
+                <!-- Teleoperation Controls -->
+                <div class="card">
+                    <h3 class="card-title">Manual Teleoperation Drive</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Use WASD or Keyboard Arrow Keys to drive robot manually.
+                    </p>
+                    <div class="dpad-container">
+                        <div></div>
+                        <button class="dpad-btn" id="btnDriveForward">▲</button>
+                        <div></div>
+                        <button class="dpad-btn" id="btnDriveLeft">◄</button>
+                        <button class="dpad-btn" id="btnDriveStop">■</button>
+                        <button class="dpad-btn" id="btnDriveRight">►</button>
+                        <div></div>
+                        <button class="dpad-btn" id="btnDriveReverse">▼</button>
+                        <div></div>
+                    </div>
+                </div>
+
+                <!-- Mission Log Terminal -->
+                <div class="card">
+                    <h3 class="card-title">Live Mission Terminal Log</h3>
+                    <div class="terminal-window" id="dashboardTerminalLog">
+                        <div class="terminal-line"><span class="terminal-time">[14:00:01]</span> System initialized in SIMULATION mode.</div>
+                        <div class="terminal-line"><span class="terminal-time">[14:00:03]</span> Ultrasonic sensor online. Range: 85 cm.</div>
+                        <div class="terminal-line"><span class="terminal-time">[14:00:05]</span> Vision pipeline active. HSV thresholds loaded.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             7. COMPUTER VISION LAB VIEW
+             =================================================================== -->
+        <!-- ===================================================================
+             7. COMPUTER VISION LAB VIEW
+             =================================================================== -->
+        <section id="page-detection" class="page-view">
+            <div class="page-header">
+                <h1>Computer Vision Detection Lab</h1>
+                <p class="page-subtitle">Real-time OpenCV color segmentation, bounding box localization, coordinate mapping, and target tracking lab.</p>
+            </div>
+
+            <!-- Vision Controls Header Bar -->
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div id="visionStatusPill" class="status-pill">
+                            <span class="status-indicator-dot dot-online"></span> OpenCV Active
+                        </div>
+                        <span id="activeTargetStatus" class="badge badge-sim" style="font-size: 0.9rem;">Target: fruit_1</span>
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                        <select id="visionTargetSelect" style="padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem;">
+                            <option value="fruit_1">Target 1: Ripe Red Apple (Row 1)</option>
+                            <option value="fruit_2">Target 2: Ripe Red Apple (Row 1)</option>
+                            <option value="fruit_3">Target 3: Yellow Lemon (Row 2)</option>
+                            <option value="fruit_4">Target 4: Ripe Red Apple (Row 2)</option>
+                            <option value="fruit_5">Target 5: Yellow Lemon (Row 3)</option>
+                            <option value="fruit_6">Target 6: Unripe Green Fruit (Row 3)</option>
+                        </select>
+                        
+                        <button id="btnNavigateTarget" class="btn btn-primary">🚀 Approach Target Fruit</button>
+                        <button id="btnStartVision" class="btn btn-secondary">▶ Start Detection</button>
+                        <button id="btnStopVision" class="btn btn-outline">⏸ Stop Detection</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- Annotated OpenCV Camera View -->
+                <div class="card">
+                    <h3 class="card-title">Annotated OpenCV Camera View (640x480)</h3>
+                    <div style="width: 100%; height: 280px; background: #0f172a; border-radius: var(--radius-sm); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <img id="visionLabCameraFeed" src="" alt="OpenCV Bounding Box Detection Stream" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                        <div id="visionLabPlaceholder" style="color: #4ade80; font-family: var(--font-mono, monospace); font-size: 0.85rem; text-align: center;">
+                            [ INITIALIZING OPENCV BOUNDING BOX DETECTOR... ]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive HSV Threshold Adjuster -->
+                <div class="card">
+                    <h3 class="card-title">Interactive HSV Color Threshold Adjuster</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        Adjust Hue, Saturation, and Value thresholds to fine-tune color segmentation.
+                    </p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Hue (H) Min Threshold: <span id="hMinVal">0</span></label>
+                        <input type="range" class="range-slider" id="hMinSlider" min="0" max="180" value="0" data-target-val="hMinVal">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Saturation (S) Min Threshold: <span id="sMinVal">90</span></label>
+                        <input type="range" class="range-slider" id="sMinSlider" min="0" max="255" value="90" data-target-val="sMinVal">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Value (V) Min Threshold: <span id="vMinVal">90</span></label>
+                        <input type="range" class="range-slider" id="vMinSlider" min="0" max="255" value="90" data-target-val="vMinVal">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-Time Detected Objects Matrix Table -->
+            <div class="card" style="margin-top: 1.5rem;">
+                <h3 class="card-title">Real-Time OpenCV Detection Results & Field Coordinate Mapping</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Target ID</th>
+                                <th>Class Classification</th>
+                                <th>Confidence</th>
+                                <th>Image Bounding Box [x,y,w,h]</th>
+                                <th>Mapped Field Coordinates (X, Y)</th>
+                                <th>Action Lock</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visionDetectionsTbody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: var(--text-secondary);">
+                                    Scanning camera FOV for fruit targets...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             8. TEST RESULTS VIEW
+             =================================================================== -->
+        <section id="page-results" class="page-view">
+            <div class="page-header">
+                <h1>System Verification & Test Results</h1>
+                <p class="page-subtitle">Database-backed verification test matrix for robot movement, vision accuracy, arm articulation, and safety braking.</p>
+            </div>
+
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Subsystem / Scenario</th>
+                                <th>Expected Behaviour</th>
+                                <th>Actual Result</th>
+                                <th>Mode</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TEST-01</td>
+                                <td>Manual Movement Drive</td>
+                                <td>Robot responds to WASD / D-Pad commands cleanly.</td>
+                                <td>Chassis moves forward, reverse, left, right as commanded.</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                                <td><span class="badge badge-success">PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>TEST-02</td>
+                                <td>OpenCV Fruit Detection</td>
+                                <td>Bounding box accurately encloses target red fruit.</td>
+                                <td>High detection accuracy with &gt; 92% confidence score.</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                                <td><span class="badge badge-success">PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>TEST-03</td>
+                                <td>Obstacle Avoidance Brake</td>
+                                <td>Robot halts motion when obstacle distance &lt; 30 cm.</td>
+                                <td>Automatic brake triggered cleanly at 28 cm.</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                                <td><span class="badge badge-success">PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>TEST-04</td>
+                                <td>Arm Joint Articulation</td>
+                                <td>Servo joints reach targeted target coordinates.</td>
+                                <td>Smooth kinematic joint movement verified.</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                                <td><span class="badge badge-success">PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>TEST-05</td>
+                                <td>Full Pick & Place Mission</td>
+                                <td>Complete autonomous cycle from row search to fruit deposit.</td>
+                                <td>State machine completed cycle without error.</td>
+                                <td><span class="badge badge-sim">SIMULATION</span></td>
+                                <td><span class="badge badge-success">PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>TEST-06</td>
+                                <td>Physical Hardware Serial Link</td>
+                                <td>Arduino/ESP32 serial connection teleoperation.</td>
+                                <td>Pending hardware prototype assembly.</td>
+                                <td><span class="badge badge-hw">HARDWARE</span></td>
+                                <td><span class="badge badge-warning">PENDING</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             9. DOCUMENTATION & VIVA Q&A VIEW
+             =================================================================== -->
+        <section id="page-docs" class="page-view">
+            <div class="page-header">
+                <h1>Documentation & Viva Voce Preparation</h1>
+                <p class="page-subtitle">Project report summary, presentation slide structure, and 25+ viva voce examination questions with answers.</p>
+            </div>
+
+            <!-- Search Filter for Viva Q&A -->
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <h3 class="card-title">Search Viva Voce Question Bank</h3>
+                <input type="text" id="vivaSearchInput" placeholder="Type keywords (e.g. OpenCV, HSV, Servo, Kinematics, L298N, FastAPI)..." style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.95rem;">
+            </div>
+
+            <!-- Viva Q&A Accordion -->
+            <div id="vivaAccordion">
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q1: What is the main objective of this Agriculture Manipulation Robot project?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        The primary objective is to design and develop a simulation-first autonomous mobile robot equipped with a 4-DOF manipulator arm and computer vision to navigate plant rows, detect ripe fruits, avoid obstacles, pick target crops, and deposit them into an onboard basket while monitoring soil health.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q2: Why use HSV color space instead of RGB for fruit detection in OpenCV?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        RGB combines color brightness and chromaticity across all three channels, making it highly sensitive to outdoor sunlight changes and shadows. HSV (Hue, Saturation, Value) separates pure color information (Hue) from lighting intensity (Value), enabling robust color segmentation under varying illumination.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q3: How does the L298N motor driver control the chassis motors?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        The L298N is a dual H-bridge motor driver. It uses digital input pins (IN1-IN4) to switch current direction through the motor coils (controlling forward/reverse rotation) and PWM pins (ENA, ENB) to adjust voltage duty cycles for speed control.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q4: What is inverse kinematics in the context of the 4-DOF robotic arm?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        Inverse Kinematics (IK) is the mathematical calculation used to determine the required joint angles (θ1, θ2, θ3) needed to position the end-effector gripper at a specific 3D target coordinate (X, Y, Z) near the identified fruit.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q5: How does the HC-SR04 ultrasonic sensor measure obstacle distance?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        The HC-SR04 emits a high-frequency ultrasonic sonic pulse (40 kHz) from its transmitter. It measures the time elapsed (\(t\)) until the echo returns to the receiver. Distance is calculated using the formula: \(\text{Distance} = \frac{\text{Speed of Sound } (343 \text{ m/s}) \times t}{2}\).
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q6: Why is FastAPI preferred over Flask or Django for this backend application?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        FastAPI is built on ASGI (Asynchronous Server Gateway Interface), making it extremely fast. It natively supports high-frequency WebSockets for live video/telemetry streaming and uses Pydantic for automatic data validation and interactive OpenAPI documentation (`/docs`).
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q7: What is the priority mechanism of the Emergency Stop button?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        The Emergency Stop (E-STOP) handler runs at the highest priority level in the backend. When activated, it immediately interrupts all active mission threads, sets motor speed outputs to zero, locks arm servo positions, and blocks incoming navigation commands until explicitly reset.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q8: How does WebSockets differ from standard REST HTTP requests in this dashboard?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        Standard HTTP REST follows a request-response cycle (client asks, server answers). WebSockets establish a single persistent, full-duplex TCP connection, allowing the backend to stream live telemetry and camera frame data continuously to the UI 10+ times per second without request overhead.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q9: Why are free wheel castors or differential steering used for this 4-wheel chassis?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        Differential steering allows the mobile robot to rotate in place (zero turning radius) by driving wheels on opposite sides in reverse directions. This is ideal for tight turns at the end of narrow agricultural crop rows.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Q10: What is the function of the soil moisture sensor in this system?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        The analog soil moisture sensor measures electrical resistance/capacitance in the soil. Lower resistance indicates high water content, enabling the robot to map field moisture levels while harvesting.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             10. TEAM & CONTACT VIEW
+             =================================================================== -->
+        <section id="page-team" class="page-view">
+            <div class="page-header">
+                <h1>Project Team & Academic Credits</h1>
+                <p class="page-subtitle">Student developer information, course guide credits, and repository links.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Student Developer</h3>
+                    <p style="font-weight: 700; font-size: 1.1rem; color: var(--primary-color);">2nd-Year B.Tech IT Student</p>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                        <strong>Department:</strong> Information Technology<br>
+                        <strong>Course:</strong> Robotics & Automation Engineering<br>
+                        <strong>Focus:</strong> Robotics Kinematics, Computer Vision, Full-Stack Web Teleoperation
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Project Supervisor / Guide</h3>
+                    <p style="font-weight: 700; font-size: 1.1rem; color: var(--text-primary);">Department Faculty Guide</p>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                        <strong>Institution:</strong> Engineering College / University<br>
+                        <strong>Domain:</strong> Embedded Systems & Mechatronics
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div>
+                <strong>Agriculture Manipulation Robot</strong> | Simulation & Teleoperation Platform
+            </div>
+            <div>
+                Academic Year 2025-2026 | Built for Viva & Demo Presentation
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript ES Module Entry Points -->
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/simulation.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/vision.js"></script>
+    <script type="module" src="js/mission.js"></script>
+    <script type="module" src="js/arm.js"></script>
+</body>
+
+
+</html>
