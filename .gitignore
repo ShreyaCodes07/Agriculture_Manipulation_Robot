@@ -1,0 +1,31 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+backend/.pytest_cache/
+
+# Virtual Environments
+venv/
+backend/venv/
+ENV/
+env/
+
+# Databases
+*.db
+*.sqlite3
+backend/agri_robot.db
+
+# Environment variables & secrets
+.env
+.env.*
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -46,10 +46,18 @@ app.include_router(arm.router)
 
 
 
-@app.get("/", tags=["Health Check"])
+import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend"))
+index_file = os.path.join(frontend_path, "index.html")
+
+@app.get("/api", tags=["Health Check"])
+@app.get("/api/info", tags=["Health Check"])
 def root_status():
     """
-    Root endpoint welcome route.
+    Root API welcome and system information route.
     """
     return {
         "project": settings.PROJECT_NAME,
@@ -77,10 +85,16 @@ def get_robot_status():
     """
     return robot_state.get_status()
 
-# Serve static frontend web application if present
-import os
-from fastapi.staticfiles import StaticFiles
-frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend"))
+@app.get("/", tags=["Frontend"])
+def serve_index():
+    """
+    Serves the primary Single Page Application (SPA) dashboard.
+    """
+    if os.path.exists(index_file):
+        return FileResponse(index_file)
+    return root_status()
+
+# Serve static frontend web assets (CSS, JS)
 if os.path.exists(frontend_path):
     app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 

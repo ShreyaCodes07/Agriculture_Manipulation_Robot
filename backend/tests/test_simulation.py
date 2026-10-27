@@ -28,6 +28,22 @@ def test_simulation_world_snapshot():
     assert len(data["fruits"]) == 6
     assert len(data["obstacles"]) == 2
 
+def test_root_serves_spa_frontend():
+    """Verify that GET / returns the HTML Single Page Application."""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers.get("content-type", "")
+    assert "Agriculture Manipulation Robot" in response.text
+
+def test_api_info_endpoint():
+    """Verify that GET /api returns JSON project metadata."""
+    response = client.get("/api")
+    assert response.status_code == 200
+    data = response.json()
+    assert "project" in data
+    assert "version" in data
+    assert data["status"] == "ONLINE"
+
 def test_simulation_start_pause_reset():
     """Test start, pause, and reset simulation endpoints."""
     # Start

@@ -133,6 +133,17 @@ export async function navigateVisionTarget() {
     return await apiRequest('/api/vision/navigate', 'POST');
 }
 
+export async function updateVisionHSV(h_min = 0, s_min = 100, v_min = 100, h_max = 10, s_max = 255, v_max = 255) {
+    return await apiRequest('/api/vision/hsv', 'POST', {
+        h_min,
+        s_min,
+        v_min,
+        h_max,
+        s_max,
+        v_max
+    });
+}
+
 // --- Mission Planner & Autonomous Row Navigation APIs ---
 export async function getMissionStatus() {
     return await apiRequest('/api/mission/status');
@@ -140,6 +151,10 @@ export async function getMissionStatus() {
 
 export async function sendMissionControl(action, mission_type = 'HARVEST_ALL') {
     return await apiRequest('/api/mission/control', 'POST', { action, mission_type });
+}
+
+export async function stepMission(dt = 0.1) {
+    return await apiRequest('/api/mission/step', 'POST', { dt });
 }
 
 export async function planCustomPath(start_x, start_y, goal_x, goal_y) {
@@ -158,7 +173,3 @@ export async function sendArmIK(x, y, z = 10.0, pitch = 0.0) {
 export async function runPickSequence(fruit_id = null) {
     return await apiRequest('/api/arm/pick_sequence', 'POST', { fruit_id });
 }
-
-
-
-
